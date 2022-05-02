@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class TestableServiceService {
 
   constructor() { }
 
-  numbersSize(){
+  numbersSize() {
     return this.numbers.length;
   }
 
@@ -23,6 +24,17 @@ export class TestableServiceService {
 
   getNumbersArray() {
     return this.numbers
+  }
+  changedObservableSub = false
+
+  asyncMethod() {
+    of(true).subscribe((value) => this.changedObservableSub = value)
+  }
+
+  changedtimer = false
+
+  timerMethod() {
+    setInterval(() => this.changedtimer = true, 500)
   }
 
 }
